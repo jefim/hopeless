@@ -48,6 +48,9 @@ namespace WindowsPhoneGame1
             this.Components.Add(this.sprites);
 
             this.sprites.Add(new Tilemap("tilemap1"));
+            var sprite = new Animated8DirSprite("horse", 73, 77, 0.05f);
+            sprite.Position = new Vector2(250, 250);
+            this.sprites.Add(sprite);
         }
 
         /// <summary>
@@ -94,10 +97,12 @@ namespace WindowsPhoneGame1
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-            // TODO: Add your update logic here
+            Touches = TouchPanel.GetState().ToList();
 
             base.Update(gameTime);
         }
+
+        public static List<TouchLocation> Touches;
 
         /// <summary>
         /// This is called when the game should draw itself.

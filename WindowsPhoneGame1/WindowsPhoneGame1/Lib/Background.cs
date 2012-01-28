@@ -57,7 +57,6 @@ namespace WindowsPhoneGame1.Lib
         protected override void OnTouch(TouchLocation touch)
         {
             base.OnTouch(touch);
-
             this.Direction = -1 * (touch.Position - new Vector2(Game1.ScreenWidth / 2, Game1.ScrrenHeight / 2));
             this.DistanceToMove = this.Direction.Length();
             this.Direction.Normalize();

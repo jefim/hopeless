@@ -65,6 +65,8 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Lib\Animated8DirSprite.cs" />
+    <Compile Include="Lib\AnimatedSprite.cs" />
     <Compile Include="Lib\Background.cs" />
     <Compile Include="Lib\SpriteManager.cs" />
     <Compile Include="Lib\Tilemap.cs" />

@@ -47,10 +47,9 @@ namespace WindowsPhoneGame1.Lib
 
         protected void HandleInput()
         {
-            var touches = TouchPanel.GetState();
-            foreach (var touch in touches)
+            foreach (var touch in Game1.Touches)
             {
-                if (touch.State == TouchLocationState.Released) { this.OnTouch(touch); }
+                this.OnTouch(touch);
             }
         }
 

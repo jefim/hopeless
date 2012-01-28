@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input.Touch;
 
 namespace WindowsPhoneGame1.Lib
 {
@@ -14,7 +15,7 @@ namespace WindowsPhoneGame1.Lib
         public Tilemap(string texturePath)
             : base(texturePath)
         {
-            this.Speed = 5;
+            this.Speed = 2;
         }
 
         private int[,] map =
@@ -23,13 +24,13 @@ namespace WindowsPhoneGame1.Lib
             { 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 },
             { 9, 9, 10, 9, 9, 9, 9, 9, 10, 9, 9, 9, 9, 9, 9 },
             { 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 11, 9, 9, 9, 9 },
-            { 9, 0, 3, 6, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 },
-            { 9, 1, 4, 7, 9, 9, 11, 9, 9, 9, 9, 9, 9, 9, 9 },
-            { 9, 2, 5, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 },
-            { 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 },
-            { 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 },
-            { 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 },
-            { 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 },
+            //{ 9, 0, 3, 6, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 },
+            //{ 9, 1, 4, 7, 9, 9, 11, 9, 9, 9, 9, 9, 9, 9, 9 },
+            //{ 9, 2, 5, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 },
+            //{ 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 },
+            //{ 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 },
+            //{ 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 },
+            //{ 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 },
             { 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 }
         };
 
@@ -64,12 +65,12 @@ namespace WindowsPhoneGame1.Lib
         public override void Draw(SpriteBatch sb)
         {
             //base.Draw(sb);
-            for (int i = 0; i < map.GetLength(0); i++)
+            for (int i = 0; i < map.GetLength(1); i++)
             {
-                for (int j = 0; j < map.GetLength(1); j++)
+                for (int j = 0; j < map.GetLength(0); j++)
                 {
                     var tilePosition = this.Position + (new Vector2(i * tileSize.X, j * tileSize.Y));
-                    var sourceRect = new Rectangle((int)(map[i,j] * tileSize.X), 0, (int)tileSize.X, (int)tileSize.Y);
+                    var sourceRect = new Rectangle((int)(map[j,i] * tileSize.X), 0, (int)tileSize.X, (int)tileSize.Y);
                     sb.Draw(this.Texture, tilePosition, sourceRect, Color.White);
                 }
             }
@@ -78,10 +79,12 @@ namespace WindowsPhoneGame1.Lib
         protected override void OnTouch(Microsoft.Xna.Framework.Input.Touch.TouchLocation touch)
         {
             base.OnTouch(touch);
-
-            this.Direction = -1 * (touch.Position - new Vector2(Game1.ScreenWidth / 2, Game1.ScrrenHeight / 2));
-            this.DistanceToMove = this.Direction.Length();
-            this.Direction.Normalize();
+            if (touch.State == TouchLocationState.Moved)
+            {
+                this.Direction = -1 * (touch.Position - new Vector2(Game1.ScreenWidth / 2, Game1.ScrrenHeight / 2));
+                this.DistanceToMove = this.Direction.Length();
+                this.Direction.Normalize();
+            }
         }
     }
 }
