@@ -47,7 +47,7 @@ namespace WindowsPhoneGame1
             this.sprites = new SpriteManager(this);
             this.Components.Add(this.sprites);
 
-            this.sprites.Add(new Tilemap("tilemap1"));
+            this.sprites.Add(new Tilemap("tilemap2"));
             var sprite = new Animated8DirSprite("horse", 73, 77, 0.05f);
             sprite.Position = new Vector2(250, 250);
             this.sprites.Add(sprite);

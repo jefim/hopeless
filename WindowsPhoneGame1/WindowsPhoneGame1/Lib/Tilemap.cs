@@ -20,21 +20,24 @@ namespace WindowsPhoneGame1.Lib
 
         private int[,] map =
         {
-            { 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 },
-            { 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 },
-            { 9, 9, 10, 9, 9, 9, 9, 9, 10, 9, 9, 9, 9, 9, 9 },
-            { 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 11, 9, 9, 9, 9 },
-            //{ 9, 0, 3, 6, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 },
-            //{ 9, 1, 4, 7, 9, 9, 11, 9, 9, 9, 9, 9, 9, 9, 9 },
-            //{ 9, 2, 5, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 },
-            //{ 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 },
-            //{ 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 },
-            //{ 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 },
-            //{ 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 },
-            { 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 }
+            { 1, 2, 1, 2, 1, 2, 1, 1, 2, 1, 2, 1, 2, 1, 2},
+            { 1, 2, 1, 2, 1, 2, 1, 1, 2, 1, 2, 1, 2, 1, 2},
+            { 1, 2, 1, 2, 1, 2, 1, 1, 2, 1, 2, 1, 2, 1, 2},
+
+            { 1, 2, 1, 2, 1, 2, 1, 1, 2, 1, 2, 1, 2, 1, 2},
+            { 1, 2, 1, 2, 1, 2, 1, 1, 2, 1, 2, 1, 2, 1, 2},
+            { 1, 2, 1, 2, 1, 2, 1, 1, 2, 1, 2, 1, 2, 1, 2},
+
+            { 1, 2, 1, 2, 1, 2, 1, 1, 2, 1, 2, 1, 2, 1, 2},
+            { 1, 2, 1, 2, 1, 2, 1, 1, 2, 1, 2, 1, 2, 1, 2},
+            { 1, 2, 1, 2, 1, 2, 1, 1, 2, 1, 2, 1, 2, 1, 2},
+
+            { 1, 2, 1, 2, 1, 2, 1, 1, 2, 1, 2, 1, 2, 1, 2},
+            { 1, 2, 1, 2, 1, 2, 1, 1, 2, 1, 2, 1, 2, 1, 2},
+            { 1, 2, 1, 2, 1, 2, 1, 1, 2, 1, 2, 1, 2, 1, 2},
         };
 
-        private readonly Vector2 tileSize = new Vector2(32, 32);
+        private readonly Vector2 tileSize = new Vector2(128, 128);
 
         public override void Update(GameTime gameTime)
         {
@@ -70,7 +73,7 @@ namespace WindowsPhoneGame1.Lib
                 for (int j = 0; j < map.GetLength(0); j++)
                 {
                     var tilePosition = this.Position + (new Vector2(i * tileSize.X, j * tileSize.Y));
-                    var sourceRect = new Rectangle((int)(map[j,i] * tileSize.X), 0, (int)tileSize.X, (int)tileSize.Y);
+                    var sourceRect = new Rectangle((int)(map[i, j]%16 * tileSize.X), (int)(map[i, j]/16 * tileSize.Y), (int)tileSize.X, (int)tileSize.Y);
                     sb.Draw(this.Texture, tilePosition, sourceRect, Color.White);
                 }
             }
