@@ -73,7 +73,7 @@ namespace WindowsPhoneGame1.Lib
                 for (int j = 0; j < map.GetLength(0); j++)
                 {
                     var tilePosition = this.Position + (new Vector2(i * tileSize.X, j * tileSize.Y));
-                    var sourceRect = new Rectangle((int)(map[i, j]%16 * tileSize.X), (int)(map[i, j]/16 * tileSize.Y), (int)tileSize.X, (int)tileSize.Y);
+                    var sourceRect = new Rectangle((int)(map[j, i]%16 * tileSize.X), (int)(map[j, i]/16 * tileSize.Y), (int)tileSize.X, (int)tileSize.Y);
                     sb.Draw(this.Texture, tilePosition, sourceRect, Color.White);
                 }
             }
