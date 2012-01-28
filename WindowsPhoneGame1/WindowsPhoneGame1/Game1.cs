@@ -47,7 +47,7 @@ namespace WindowsPhoneGame1
             this.sprites = new SpriteManager(this);
             this.Components.Add(this.sprites);
 
-            this.sprites.Add(new Tilemap("tilemap1"));
+            this.sprites.Add(new Tilemap("tilemap2"));
         }
 
         /// <summary>
