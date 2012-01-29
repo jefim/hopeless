@@ -68,6 +68,7 @@
     <Compile Include="Lib\Animated8DirSprite.cs" />
     <Compile Include="Lib\AnimatedSprite.cs" />
     <Compile Include="Lib\Background.cs" />
+    <Compile Include="Lib\Bullet.cs" />
     <Compile Include="Lib\Button.cs" />
     <Compile Include="Lib\Tank.cs" />
     <Compile Include="Lib\Screens\GameScreen.cs" />

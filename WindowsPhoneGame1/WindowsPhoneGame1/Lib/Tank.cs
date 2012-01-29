@@ -13,6 +13,7 @@ namespace WindowsPhoneGame1.Lib
             bodySprite = new AnimatedSprite(bodyTexturePath, frameWidth, frameHeight, frameChangeIntervalSeconds);
             turretSprite = new Sprite(turretTextureSprite);
         }
+
         public AnimatedSprite Body
         {
             get
@@ -41,6 +42,7 @@ namespace WindowsPhoneGame1.Lib
                 turretSprite.Position = value;
             }
         }
+
         public Vector2 BodyDirection { 
             get
             {
@@ -52,6 +54,7 @@ namespace WindowsPhoneGame1.Lib
                 bodySprite.Direction = value;
             }
         }
+
         public Vector2 TurretDirection {
             get
             {
@@ -63,6 +66,7 @@ namespace WindowsPhoneGame1.Lib
                 turretSprite.Direction = value;
             }
         }
+
         public float Speed { 
                    get
             {
@@ -75,6 +79,7 @@ namespace WindowsPhoneGame1.Lib
                 turretSprite.Speed = value;
             }
         }
+
         public float BodyRotation {
             get
             {
@@ -86,6 +91,7 @@ namespace WindowsPhoneGame1.Lib
                 bodySprite.Rotation = value;
             }
         }
+
         public float TurretRotation {
             get
             {
@@ -97,6 +103,7 @@ namespace WindowsPhoneGame1.Lib
                 turretSprite.Rotation = value;
             }
         }
+
         public Vector2 Origin {
             get
             {

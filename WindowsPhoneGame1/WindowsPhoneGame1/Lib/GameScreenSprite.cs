@@ -11,7 +11,7 @@ namespace WindowsPhoneGame1.Lib
     {
         protected GameScreen gameScreen;
 
-        public GameScreenSprite(string texturePath, int frameWidth, int frameHeight, int frameChangeInterval, GameScreen gameScreen)
+        public GameScreenSprite(string texturePath, int frameWidth, int frameHeight, float frameChangeInterval, GameScreen gameScreen)
             : base(texturePath, frameWidth, frameHeight, frameChangeInterval)
         {
             this.gameScreen = gameScreen;
