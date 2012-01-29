@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input.Touch;
+using Microsoft.Xna.Framework.Media;
 
 namespace WindowsPhoneGame1.Lib.Screens
 {
@@ -84,6 +85,9 @@ namespace WindowsPhoneGame1.Lib.Screens
             var powerbar = new Powerbar() { Position = new Vector2(800 - 150, 480 - 70) };
             this.powerbar = powerbar;
             this.Add(powerbar);
+
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Play(this.Game1.MySong);
         }
 
         bool TouchHitsAnyButtons(TouchLocation touch)
@@ -171,16 +175,26 @@ namespace WindowsPhoneGame1.Lib.Screens
             this.tank.Body.Paused = false;
         }
 
+        float? timer = null;
+
         public override void Update(GameTime gameTime)
         {
             if (!this.IsActive) return;
-            if (this.Enemies.Where(o => o.IsVisible).Count() == 0)
-            {
-                this.IsActive = false;
-                this.Game1.StartScreen.IsActive = true;
-            }
 
             var elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (this.Enemies.Where(o => o.IsVisible).Count() == 0 || timer != null)
+            {
+                if (timer == null) timer = 0;
+                timer += elapsed;
+                if (timer > 2)
+                {
+                    MediaPlayer.Stop();
+                    this.IsActive = false;
+                    this.Game1.StartScreen.IsActive = true;
+                }
+            }
+
 
             var rect = this.tank.Body.CalculateNextBounds(gameTime);
             rect.Inflate(3, 3);
