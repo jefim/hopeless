@@ -15,6 +15,7 @@ namespace WindowsPhoneGame1.Lib
             : base(texturePath, frameWidth, frameHeight, frameChangeInterval)
         {
             this.gameScreen = gameScreen;
+            this.IsVisible = true;
         }
 
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
@@ -28,11 +29,20 @@ namespace WindowsPhoneGame1.Lib
             return this.Position + this.gameScreen.SceneOffset;
         }
 
+        public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch sb)
+        {
+            if (this.IsVisible)
+            {
+                base.Draw(sb);
+            }
+        }
 
         public override Rectangle CalculateNextBounds(GameTime gameTime)
         {
             var nextPos = this.CalculateNextRenderPosition(gameTime) - this.Origin;
             return new Rectangle((int)nextPos.X, (int)nextPos.Y, this.frameWidth, this.frameHeight);
         }
+
+        public bool IsVisible { get; set; }
     }
 }

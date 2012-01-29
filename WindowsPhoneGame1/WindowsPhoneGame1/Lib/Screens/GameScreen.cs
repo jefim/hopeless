@@ -11,7 +11,7 @@ namespace WindowsPhoneGame1.Lib.Screens
     {
         private Tank tank;
         private Tilemap tilemap;
-        private List<Target> enemies = new List<Target>();
+        public List<Target> Enemies = new List<Target>();
         private Vector2 direction;
         private Button buttonShooting;
         private Powerbar powerbar;
@@ -33,19 +33,19 @@ namespace WindowsPhoneGame1.Lib.Screens
             this.Add(tank.Cannon);
 
             var enemy = new Target("enemy1", 64, 64, 1, this);
-            this.enemies.Add(enemy);
+            this.Enemies.Add(enemy);
             this.Add(enemy);
 
             enemy = new Target("enemy1", 64, 64, 1, this) { Position = new Vector2(65, 189) };
-            this.enemies.Add(enemy);
+            this.Enemies.Add(enemy);
             this.Add(enemy);
 
             enemy = new Target("enemy1", 64, 64, 1, this) { Position = new Vector2(560, 256) };
-            this.enemies.Add(enemy);
+            this.Enemies.Add(enemy);
             this.Add(enemy);
 
             enemy = new Target("enemy1", 64, 64, 1, this) { Position = new Vector2(300, 300) };
-            this.enemies.Add(enemy);
+            this.Enemies.Add(enemy);
             this.Add(enemy);
 
 
@@ -106,8 +106,8 @@ namespace WindowsPhoneGame1.Lib.Screens
             this.tank.TurretDirection = direction;
             this.Add(new Bullet(this)
             {
-                Power = power,
-                Position = new Vector2(400, 240) + direction * 35,
+                AltitudeSpeed = power + 10,
+                Position =  new Vector2(400, 240) + direction * 35 - this.SceneOffset,
                 Origin = new Vector2(16 / 2, 16 / 2),
                 Direction = direction,
                 Speed = 300
@@ -168,7 +168,7 @@ namespace WindowsPhoneGame1.Lib.Screens
 
             var rect = this.tank.Body.CalculateNextBounds(gameTime);
             rect.Inflate(3, 3);
-            foreach (var enemy in enemies)
+            foreach (var enemy in Enemies)
             {
                 var predictEnemyRect = enemy.CalculateNextBounds(gameTime);
                 bool intersects = false;

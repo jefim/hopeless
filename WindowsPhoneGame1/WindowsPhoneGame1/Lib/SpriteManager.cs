@@ -12,10 +12,13 @@ namespace WindowsPhoneGame1.Lib
         private SpriteBatch spriteBatch;
         protected List<Sprite> sprites;
 
+        public bool IsActive { get; set; }
+
         public SpriteManager(Game1 game)
             : base(game)
         {
             this.sprites = new List<Sprite>();
+            this.IsActive = false;
         }
 
         public void Add(Sprite sprite)
@@ -44,6 +47,7 @@ namespace WindowsPhoneGame1.Lib
 
         public override void Update(GameTime gameTime)
         {
+            if (!this.IsActive) return;
             base.Update(gameTime);
 
             this.sprites.ForEach(o => o.Update(gameTime));
@@ -51,6 +55,8 @@ namespace WindowsPhoneGame1.Lib
 
         public override void Draw(GameTime gameTime)
         {
+            if (!this.IsActive) return;
+
             base.Draw(gameTime);
             this.spriteBatch.Begin();
 

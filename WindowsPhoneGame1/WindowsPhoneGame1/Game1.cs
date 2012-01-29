@@ -46,6 +46,7 @@ namespace WindowsPhoneGame1
             TouchPanel.EnabledGestures = GestureType.Tap | GestureType.DoubleTap;
 
             this.gameScreen = new GameScreen(this);
+            this.gameScreen.IsActive = true;
             this.Components.Add(this.gameScreen);
         }
 
