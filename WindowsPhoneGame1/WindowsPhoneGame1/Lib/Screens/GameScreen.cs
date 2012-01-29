@@ -32,19 +32,19 @@ namespace WindowsPhoneGame1.Lib.Screens
             this.Add(tank.Body);
             this.Add(tank.Cannon);
 
-            var enemy = new Target("enemy1", 64, 64, 1, this);
+            var enemy = new Target("snake", 84, 84, 0.1f , this);
             this.enemies.Add(enemy);
             this.Add(enemy);
 
-            enemy = new Target("enemy1", 64, 64, 1, this) { Position = new Vector2(65, 189) };
+            enemy = new Target("snake", 84, 84, 0.1f, this) { Position = new Vector2(65, 189) };
             this.enemies.Add(enemy);
             this.Add(enemy);
 
-            enemy = new Target("enemy1", 64, 64, 1, this) { Position = new Vector2(560, 256) };
+            enemy = new Target("snake", 84, 84, 0.1f, this) { Position = new Vector2(560, 256) };
             this.enemies.Add(enemy);
             this.Add(enemy);
 
-            enemy = new Target("enemy1", 64, 64, 1, this) { Position = new Vector2(300, 300) };
+            enemy = new Target("snake", 84, 84, 0.1f, this) { Position = new Vector2(300, 300) };
             this.enemies.Add(enemy);
             this.Add(enemy);
 

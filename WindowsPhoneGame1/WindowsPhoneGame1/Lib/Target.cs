@@ -8,10 +8,10 @@ namespace WindowsPhoneGame1.Lib
 {
     public class Target : GameScreenSprite
     {
-        public Target(string texturePath, int frameWidth, int frameHeight, int frameChangeInterval, GameScreen gameScreen)
+        public Target(string texturePath, int frameWidth, int frameHeight, float frameChangeInterval, GameScreen gameScreen)
             : base(texturePath, frameWidth, frameHeight, frameChangeInterval, gameScreen)
         {
-
+            this.Paused = false;
         }
     }
 }
