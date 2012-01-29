@@ -9,8 +9,8 @@ namespace WindowsPhoneGame1.Lib
 {
     public class AnimatedSprite : Sprite
     {
-        private int frameWidth;
-        private int frameHeight;
+        protected int frameWidth;
+        protected int frameHeight;
         private int currentFrame;
         private int totalFrames;
         private float frameChangeIntervalSeconds;
@@ -57,6 +57,20 @@ namespace WindowsPhoneGame1.Lib
             sb.Draw(this.Texture, position, sourceRect, Color.White, this.Rotation, this.Origin, 1, SpriteEffects.None, 0);
         }
 
-       // protected Ren
+        public override Rectangle GetBounds()
+        {
+            return new Rectangle((int)this.RenderPosition.X, (int)this.RenderPosition.Y, this.frameWidth, this.frameHeight);
+        }
+
+        public override Vector2 CalculateNextRenderPosition(GameTime gameTime)
+        {
+            return this.Position;
+        }
+
+        public override Rectangle CalculateNextBounds(GameTime gameTime)
+        {
+            var nextPos = this.CalculateNextRenderPosition(gameTime);
+            return new Rectangle((int)nextPos.X, (int)nextPos.Y, this.frameWidth, this.frameHeight);
+        }
     }
 }

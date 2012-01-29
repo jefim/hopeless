@@ -17,6 +17,7 @@ namespace WindowsPhoneGame1.Lib
         public string TexturePath { get { return texturePath; } }
         public Texture2D Texture { get { return texture; } }
         public Vector2 Position { get; set; }
+        public Vector2 RenderPosition { get; set; }
         public Vector2 Direction { get; set; }
         public float Speed { get; set; }
         public float Rotation { get; set; }
@@ -40,6 +41,7 @@ namespace WindowsPhoneGame1.Lib
             {
                 this.Position += this.Direction * this.Speed * elapsedS;
             }
+
             if (this.Direction != Vector2.Zero)
             {
                 this.Rotation = Utils.VectorToAngle(this.Direction);
@@ -57,6 +59,22 @@ namespace WindowsPhoneGame1.Lib
             {
                 this.OnTouch(touch);
             }
+        }
+
+        public virtual Rectangle GetBounds()
+        {
+            return new Rectangle((int)this.RenderPosition.X, (int)this.RenderPosition.Y, this.Texture.Width, this.Texture.Height);
+        }
+
+        public virtual Vector2 CalculateNextRenderPosition(GameTime gameTime)
+        {
+            return this.Position;
+        }
+
+        public virtual Rectangle CalculateNextBounds(GameTime gameTime)
+        {
+            var nextPos = this.CalculateNextRenderPosition(gameTime);
+            return new Rectangle((int)nextPos.X, (int)nextPos.Y, this.Texture.Width, this.Texture.Height);
         }
 
         protected virtual void OnTouch(TouchLocation touch)

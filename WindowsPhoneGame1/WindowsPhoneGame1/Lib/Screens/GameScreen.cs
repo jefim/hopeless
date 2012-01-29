@@ -78,37 +78,47 @@ namespace WindowsPhoneGame1.Lib.Screens
 
         void buttonRight_Touch(object sender, TouchEventArgs e)
         {
-            this.tilemap.Direction = new Vector2(-1, 0);
             this.direction = new Vector2(-1, 0);
             this.tank.Direction = new Vector2(-1, 0);
         }
 
         void buttonLeft_Touch(object sender, TouchEventArgs e)
         {
-            this.tilemap.Direction = new Vector2(1, 0);
             this.direction = new Vector2(1, 0);
             this.tank.Direction = new Vector2(1, 0);
         }
 
         void buttonDown_Touch(object sender, TouchEventArgs e)
         {
-            this.tilemap.Direction = new Vector2(0, -1);
             this.direction = new Vector2(0, -1);
             this.tank.Direction = new Vector2(0, -1);
         }
 
         void buttonUp_Touch(object sender, TouchEventArgs e)
         {
-            this.tilemap.Direction = new Vector2(0, 1);
             this.direction = new Vector2(0, 1);
             this.tank.Direction = new Vector2(0, 1);
         }
 
         public override void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
             var elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            foreach (var enemy in enemies)
+            {
+                var predictEnemyRect = enemy.CalculateNextBounds(gameTime);
+                bool intersects = false;
+                var rect = this.tank.CalculateNextBounds(gameTime);
+                predictEnemyRect.Intersects(ref rect, out intersects);
+                if(intersects)
+                {
+                    this.StopMoving();
+                }
+            }
+
             this.SceneOffset += 200 * elapsed * this.direction;
+
+            base.Update(gameTime);
         }
 
         /// <summary>

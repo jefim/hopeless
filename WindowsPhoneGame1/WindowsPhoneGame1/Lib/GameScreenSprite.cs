@@ -10,7 +10,6 @@ namespace WindowsPhoneGame1.Lib
     public class GameScreenSprite : AnimatedSprite
     {
         protected GameScreen gameScreen;
-        private Vector2 RenderPosition;
 
         public GameScreenSprite(string texturePath, int frameWidth, int frameHeight, int frameChangeInterval, GameScreen gameScreen)
             : base(texturePath, frameWidth, frameHeight, frameChangeInterval)
@@ -21,13 +20,18 @@ namespace WindowsPhoneGame1.Lib
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
         {
             base.Update(gameTime);
-            this.RenderPosition = this.Position + this.gameScreen.SceneOffset;
+            this.RenderPosition = CalculateNextRenderPosition(gameTime);
         }
 
         public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch sb)
         {
             //base.Draw(sb);
             this.RenderAtPosition(sb, this.RenderPosition);
+        }
+
+        public override Vector2 CalculateNextRenderPosition(GameTime gameTime)
+        {
+            return this.Position + this.gameScreen.SceneOffset;
         }
     }
 }

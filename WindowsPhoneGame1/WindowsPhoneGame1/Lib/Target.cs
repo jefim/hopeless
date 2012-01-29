@@ -8,8 +8,6 @@ namespace WindowsPhoneGame1.Lib
 {
     public class Target : GameScreenSprite
     {
-        private GameScreen gameScreen;
-
         public Target(string texturePath, int frameWidth, int frameHeight, int frameChangeInterval, GameScreen gameScreen)
             : base(texturePath, frameWidth, frameHeight, frameChangeInterval, gameScreen)
         {
