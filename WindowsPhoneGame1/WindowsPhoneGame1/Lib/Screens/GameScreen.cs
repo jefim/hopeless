@@ -13,13 +13,43 @@ namespace WindowsPhoneGame1.Lib.Screens
         private Tilemap tilemap;
         private List<Target> enemies = new List<Target>();
         private Vector2 direction;
+        private Button buttonShooting;
+        private Powerbar powerbar;
 
         public GameScreen(Game1 game)
             : base(game)
         {
+            // SPRITES
             this.tilemap = new Tilemap("tilemap2", this);
             this.Add(tilemap);
 
+            this.tank = new Tank("body", "cannon", 84, 68, 0.10f);
+            this.tank.Origin = new Vector2(84 / 2, 68 / 2);
+            this.tank.BodyRotation = (float)Math.PI / 2;
+
+            tank.Position = new Vector2(400, 240);
+
+            this.Add(tank.Body);
+            this.Add(tank.Cannon);
+
+            var enemy = new Target("enemy1", 64, 64, 1, this);
+            this.enemies.Add(enemy);
+            this.Add(enemy);
+
+            enemy = new Target("enemy1", 64, 64, 1, this) { Position = new Vector2(65, 189) };
+            this.enemies.Add(enemy);
+            this.Add(enemy);
+
+            enemy = new Target("enemy1", 64, 64, 1, this) { Position = new Vector2(560, 256) };
+            this.enemies.Add(enemy);
+            this.Add(enemy);
+
+            enemy = new Target("enemy1", 64, 64, 1, this) { Position = new Vector2(300, 300) };
+            this.enemies.Add(enemy);
+            this.Add(enemy);
+
+
+            // UI ELEMENTS
             var offset = new Vector2(7, 155);
 
             var buttonUp = new Button("joystick_button_v") { Position = offset + new Vector2(115, 0) };
@@ -47,61 +77,51 @@ namespace WindowsPhoneGame1.Lib.Screens
             var buttonShooting = new Button("transparent");
             buttonShooting.Pressed += new EventHandler<TouchEventArgs>(buttonShooting_Pressed);
             buttonShooting.Released += new EventHandler<TouchEventArgs>(buttonShooting_Released);
+            this.buttonShooting = buttonShooting;
             this.Add(buttonShooting);
 
-            this.tank = new Tank("body", "cannon", 84, 68, 0.10f);
-            this.tank.Origin = new Vector2(84 / 2, 68 / 2);
-            this.tank.BodyRotation = (float)Math.PI / 2;
 
-            tank.Position = new Vector2(400 - 35, 240 - 35);
-
-            this.Add(tank.Body);
-            this.Add(tank.Cannon); 
-
-            var enemy = new Target("enemy1", 64, 64, 1, this);
-            this.enemies.Add(enemy);
-            this.Add(enemy);
-
-            enemy = new Target("enemy1", 64, 64, 1, this) { Position = new Vector2(65, 189) };
-            this.enemies.Add(enemy);
-            this.Add(enemy);
-
-            enemy = new Target("enemy1", 64, 64, 1, this) { Position = new Vector2(560, 256) };
-            this.enemies.Add(enemy);
-            this.Add(enemy);
-
-            enemy = new Target("enemy1", 64, 64, 1, this) { Position = new Vector2(300, 300) };
-            this.enemies.Add(enemy);
-            this.Add(enemy);
+            var powerbar = new Powerbar() { Position = new Vector2(800 - 150, 480 - 70) };
+            this.powerbar = powerbar;
+            this.Add(powerbar);
         }
 
         void buttonShooting_Released(object sender, TouchEventArgs e)
         {
-            if (e.Handled == true) return;
+            var power = this.powerbar.PercentFull;
+            this.powerbar.IsAnimating = false;
+            this.powerbar.PercentFull = 0;
 
+            // check if are not hitting any other buttons
+            foreach (var button in this.sprites.OfType<Button>().Where(o => o != this.buttonShooting))
+            {
+                if (button.GetBounds().Contains(new Point((int)e.Touch.Position.X, (int)e.Touch.Position.Y)))
+                {
+                    return;
+                }
+            }
+            
             var direction = e.Touch.Position - tank.Body.RenderPosition;
             direction.Normalize();
+            this.tank.TurretDirection = direction;
             this.Add(new Bullet(this)
             {
-                Position = new Vector2(250, 250),
+                Power = power,
+                Position = new Vector2(400, 240) + direction * 35,
+                Origin = new Vector2(16 / 2, 16 / 2),
                 Direction = direction,
                 Speed = 300
             });
-            e.Handled = true;
         }
 
         void buttonShooting_Pressed(object sender, TouchEventArgs e)
         {
-            if (e.Handled == true) return;
-            //throw new NotImplementedException();
-            e.Handled = true;
+            this.powerbar.IsAnimating = true;
         }
 
         void buttonNavigation_Released(object sender, TouchEventArgs e)
         {
-            if (e.Handled == true) return;
             this.StopMoving();
-            e.Handled = true;
         }
 
         public Vector2 SceneOffset { get; set; }
@@ -116,38 +136,30 @@ namespace WindowsPhoneGame1.Lib.Screens
 
         void buttonRight_Touch(object sender, TouchEventArgs e)
         {
-            if (e.Handled == true) return;
             this.direction = new Vector2(-1, 0);
             this.tank.BodyDirection = new Vector2(-1, 0);
             this.tank.Body.Paused = false;
-            e.Handled = true;
         }
 
         void buttonLeft_Touch(object sender, TouchEventArgs e)
         {
-            if (e.Handled == true) return;
             this.direction = new Vector2(1, 0);
             this.tank.BodyDirection = new Vector2(1, 0);
             this.tank.Body.Paused = false;
-            e.Handled = true;
         }
 
         void buttonDown_Touch(object sender, TouchEventArgs e)
         {
-            if (e.Handled == true) return;
             this.direction = new Vector2(0, -1);
             this.tank.BodyDirection = new Vector2(0, -1);
             this.tank.Body.Paused = false;
-            e.Handled = true;
         }
 
         void buttonUp_Touch(object sender, TouchEventArgs e)
         {
-            if (e.Handled == true) return;
             this.direction = new Vector2(0, 1);
             this.tank.BodyDirection = new Vector2(0, 1);
             this.tank.Body.Paused = false;
-            e.Handled = true;
         }
 
         public override void Update(GameTime gameTime)

@@ -11,10 +11,8 @@ namespace WindowsPhoneGame1.Lib
         public TouchEventArgs(TouchLocation touch)
         {
             this.Touch = touch;
-            this.Handled = false;
         }
 
         public TouchLocation Touch { get; set; }
-        public bool Handled { get; set; }
     }
 }

@@ -16,6 +16,7 @@ namespace WindowsPhoneGame1.Lib
         private float frameChangeIntervalSeconds;
         private float timeSinceLastFrameChange;
         public bool Paused { get; set; }
+        public float Scale { get; set; }
 
 
         public AnimatedSprite(string texturePath, int frameWidth, int frameHeight, float frameChangeIntervalSeconds)
@@ -25,6 +26,7 @@ namespace WindowsPhoneGame1.Lib
             this.frameHeight = frameHeight;
             this.frameChangeIntervalSeconds = frameChangeIntervalSeconds;
             this.Paused = true;
+            this.Scale = 1;
         }
 
         public int TextureTopOffset { get; set; }
@@ -52,7 +54,7 @@ namespace WindowsPhoneGame1.Lib
         {
             //base.Draw(sb);
             var sourceRect = new Rectangle(currentFrame * frameWidth, this.TextureTopOffset, this.frameWidth, this.frameHeight);
-            sb.Draw(this.Texture, this.RenderPosition, sourceRect, Color.White, this.Rotation, this.Origin, 1, SpriteEffects.None, 0);
+            sb.Draw(this.Texture, this.RenderPosition, sourceRect, Color.White, this.Rotation, this.Origin, this.Scale, SpriteEffects.None, 0);
         }
 
         public override Rectangle GetBounds()
