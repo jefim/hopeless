@@ -47,8 +47,8 @@ namespace WindowsPhoneGame1.Lib.Screens
 
             tank.Position = new Vector2(400 - 35, 240 - 35);
 
-            this.Add(tank.getBody());
-            this.Add(tank.getCannon()); 
+            this.Add(tank.Body);
+            this.Add(tank.Cannon); 
 
             var enemy = new Target("enemy1", 64, 64, 1, this);
             this.enemies.Add(enemy);
@@ -112,7 +112,7 @@ namespace WindowsPhoneGame1.Lib.Screens
             {
                 var predictEnemyRect = enemy.CalculateNextBounds(gameTime);
                 bool intersects = false;
-                var rect = this.tank.CalculateNextBounds(gameTime);
+                var rect = this.tank.Body.CalculateNextBounds(gameTime);
                 predictEnemyRect.Intersects(ref rect, out intersects);
                 if(intersects)
                 {

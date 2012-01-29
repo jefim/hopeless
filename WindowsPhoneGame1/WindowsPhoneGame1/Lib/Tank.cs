@@ -13,14 +13,20 @@ namespace WindowsPhoneGame1.Lib
             bodySprite = new AnimatedSprite(bodyTexturePath, frameWidth, frameHeight, frameChangeIntervalSeconds);
             turretSprite = new Sprite(turretTextureSprite);
         }
-        public AnimatedSprite getBody()
+        public AnimatedSprite Body
         {
-            return bodySprite;
+            get
+            {
+                return bodySprite;
+            }
         }
 
-        public Sprite getCannon()
+        public Sprite Cannon
         {
-            return turretSprite;
+            get
+            {
+                return turretSprite;
+            }
         }
 
         public Vector2 Position { 
