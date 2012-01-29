@@ -9,7 +9,7 @@ namespace WindowsPhoneGame1.Lib.Screens
 {
     public class GameScreen : SpriteManager
     {
-        private Sprite tank;
+        private Tank tank;
         private Tilemap tilemap;
         private List<Target> enemies = new List<Target>();
         private Vector2 direction;
@@ -41,10 +41,14 @@ namespace WindowsPhoneGame1.Lib.Screens
             buttonRight.Pressed += new EventHandler<TouchEventArgs>(buttonRight_Touch);
             buttonRight.Released += new EventHandler<TouchEventArgs>(buttonNavigation_Released);
             this.Add(buttonRight);
+            this.tank = new Tank("body", "cannon", 84, 68, 0.10f);
+	    this.tank.Origin = new Vector2(84 / 2, 68 / 2);
+	this.tank.BodyRotation = (float)Math.PI / 2;
 
-            this.tank = new AnimatedSprite("horse", 73, 77, 0.05f) { Origin = new Vector2(73 / 2, 77 / 2), Rotation = (float)Math.PI / 2 };
             tank.Position = new Vector2(400 - 35, 240 - 35);
-            this.Add(tank);
+
+            this.Add(tank.getBody());
+            this.Add(tank.getCannon()); 
 
             var enemy = new Target("enemy1", 64, 64, 1, this);
             this.enemies.Add(enemy);
@@ -79,25 +83,25 @@ namespace WindowsPhoneGame1.Lib.Screens
         void buttonRight_Touch(object sender, TouchEventArgs e)
         {
             this.direction = new Vector2(-1, 0);
-            this.tank.Direction = new Vector2(-1, 0);
+            this.tank.BodyDirection = new Vector2(-1, 0);
         }
 
         void buttonLeft_Touch(object sender, TouchEventArgs e)
         {
             this.direction = new Vector2(1, 0);
-            this.tank.Direction = new Vector2(1, 0);
+            this.tank.BodyDirection = new Vector2(1, 0);
         }
 
         void buttonDown_Touch(object sender, TouchEventArgs e)
         {
             this.direction = new Vector2(0, -1);
-            this.tank.Direction = new Vector2(0, -1);
+            this.tank.BodyDirection = new Vector2(0, -1);
         }
 
         void buttonUp_Touch(object sender, TouchEventArgs e)
         {
             this.direction = new Vector2(0, 1);
-            this.tank.Direction = new Vector2(0, 1);
+            this.tank.BodyDirection = new Vector2(0, 1);
         }
 
         public override void Update(GameTime gameTime)
