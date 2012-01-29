@@ -33,5 +33,12 @@ namespace WindowsPhoneGame1.Lib
         {
             return this.Position + this.gameScreen.SceneOffset;
         }
+
+
+        public override Rectangle CalculateNextBounds(GameTime gameTime)
+        {
+            var nextPos = this.CalculateNextRenderPosition(gameTime) - this.Origin;
+            return new Rectangle((int)nextPos.X, (int)nextPos.Y, this.frameWidth, this.frameHeight);
+        }
     }
 }

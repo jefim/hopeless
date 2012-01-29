@@ -78,6 +78,7 @@ namespace WindowsPhoneGame1.Lib.Screens
         {
             this.tilemap.Direction = Vector2.Zero;
             this.direction = Vector2.Zero;
+            this.tank.BodyDirection = Vector2.Zero;
         }
 
         void buttonRight_Touch(object sender, TouchEventArgs e)
@@ -113,6 +114,7 @@ namespace WindowsPhoneGame1.Lib.Screens
                 var predictEnemyRect = enemy.CalculateNextBounds(gameTime);
                 bool intersects = false;
                 var rect = this.tank.Body.CalculateNextBounds(gameTime);
+                rect.Inflate(5, 5);
                 predictEnemyRect.Intersects(ref rect, out intersects);
                 if(intersects)
                 {

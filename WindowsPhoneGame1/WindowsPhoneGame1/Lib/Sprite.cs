@@ -73,7 +73,7 @@ namespace WindowsPhoneGame1.Lib
 
         public virtual Rectangle CalculateNextBounds(GameTime gameTime)
         {
-            var nextPos = this.CalculateNextRenderPosition(gameTime);
+            var nextPos = this.CalculateNextRenderPosition(gameTime) - this.Origin;
             return new Rectangle((int)nextPos.X, (int)nextPos.Y, this.Texture.Width, this.Texture.Height);
         }
 
