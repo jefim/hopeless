@@ -15,6 +15,8 @@ namespace WindowsPhoneGame1.Lib
         private int totalFrames;
         private float frameChangeIntervalSeconds;
         private float timeSinceLastFrameChange;
+        public bool paused{get; set;}
+
 
         public AnimatedSprite(string texturePath, int frameWidth, int frameHeight, float frameChangeIntervalSeconds)
             : base(texturePath)
@@ -22,6 +24,7 @@ namespace WindowsPhoneGame1.Lib
             this.frameWidth = frameWidth;
             this.frameHeight = frameHeight;
             this.frameChangeIntervalSeconds = frameChangeIntervalSeconds;
+            this.paused = true;
         }
 
         public int TextureTopOffset { get; set; }
@@ -37,7 +40,7 @@ namespace WindowsPhoneGame1.Lib
             base.Update(gameTime);
             var elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
             timeSinceLastFrameChange += elapsed;
-            if (timeSinceLastFrameChange > frameChangeIntervalSeconds)
+            if (!paused && timeSinceLastFrameChange > frameChangeIntervalSeconds)
             {
                 currentFrame++;
                 currentFrame = currentFrame % totalFrames;

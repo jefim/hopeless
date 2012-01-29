@@ -78,30 +78,35 @@ namespace WindowsPhoneGame1.Lib.Screens
         {
             this.tilemap.Direction = Vector2.Zero;
             this.direction = Vector2.Zero;
+            this.tank.Body.paused = true;
         }
 
         void buttonRight_Touch(object sender, TouchEventArgs e)
         {
             this.direction = new Vector2(-1, 0);
             this.tank.BodyDirection = new Vector2(-1, 0);
+            this.tank.Body.paused = false;
         }
 
         void buttonLeft_Touch(object sender, TouchEventArgs e)
         {
             this.direction = new Vector2(1, 0);
             this.tank.BodyDirection = new Vector2(1, 0);
+            this.tank.Body.paused = false;
         }
 
         void buttonDown_Touch(object sender, TouchEventArgs e)
         {
             this.direction = new Vector2(0, -1);
             this.tank.BodyDirection = new Vector2(0, -1);
+            this.tank.Body.paused = false;
         }
 
         void buttonUp_Touch(object sender, TouchEventArgs e)
         {
             this.direction = new Vector2(0, 1);
             this.tank.BodyDirection = new Vector2(0, 1);
+            this.tank.Body.paused = false;
         }
 
         public override void Update(GameTime gameTime)
