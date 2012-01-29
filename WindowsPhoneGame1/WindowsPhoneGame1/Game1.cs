@@ -21,7 +21,8 @@ namespace WindowsPhoneGame1
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        GameScreen gameScreen = null;
+        public GameScreen GameScreen = null;
+        public StartScreen StartScreen = null;
 
         public const int ScreenWidth = 800;
         public const int ScrrenHeight = 480;
@@ -45,9 +46,13 @@ namespace WindowsPhoneGame1
 
             TouchPanel.EnabledGestures = GestureType.Tap | GestureType.DoubleTap;
 
-            this.gameScreen = new GameScreen(this);
-            this.gameScreen.IsActive = true;
-            this.Components.Add(this.gameScreen);
+            //this.GameScreen = new GameScreen(this);
+            //this.GameScreen.IsActive = false;
+            //this.Components.Add(this.GameScreen);
+
+            this.StartScreen = new StartScreen(this);
+            this.StartScreen.IsActive = true;
+            this.Components.Add(this.StartScreen);
         }
 
         /// <summary>

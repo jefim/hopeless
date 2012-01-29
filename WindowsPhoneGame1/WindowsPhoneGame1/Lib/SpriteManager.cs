@@ -11,6 +11,7 @@ namespace WindowsPhoneGame1.Lib
     {
         private SpriteBatch spriteBatch;
         protected List<Sprite> sprites;
+        public Game1 Game1 { get { return this.Game as Game1; } }
 
         public bool IsActive { get; set; }
 
@@ -36,6 +37,11 @@ namespace WindowsPhoneGame1.Lib
             base.Initialize();
 
             this.spriteBatch = new SpriteBatch(Game.GraphicsDevice);
+        }
+
+        public void Load()
+        {
+            this.LoadContent();
         }
 
         protected override void LoadContent()

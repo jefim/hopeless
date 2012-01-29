@@ -13,13 +13,13 @@ namespace WindowsPhoneGame1.Lib
         public Texture2D TextureFill { get; set; }
         public float PercentFull { get; set; }
         public bool IsAnimating { get; set; }
-
-        private int percentDirection = 1;
+        public int PercentDirection { get; set; }
 
         public Powerbar()
             : base("powerbar")
         {
             this.PercentFull = 0;
+            this.PercentDirection = 1;
         }
 
         public override void Load(ContentManager contentManager)
@@ -36,8 +36,8 @@ namespace WindowsPhoneGame1.Lib
 
             if (this.IsAnimating)
             {
-                this.PercentFull += percentDirection * 200 * elapsed;
-                if (this.PercentFull >= 100 || this.PercentFull <= 0) this.percentDirection *= -1;
+                this.PercentFull += PercentDirection * 200 * elapsed;
+                if (this.PercentFull >= 100 || this.PercentFull <= 0) this.PercentDirection *= -1;
             }
         }
 

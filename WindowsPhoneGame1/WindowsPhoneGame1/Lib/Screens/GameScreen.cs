@@ -86,20 +86,28 @@ namespace WindowsPhoneGame1.Lib.Screens
             this.Add(powerbar);
         }
 
+        bool TouchHitsAnyButtons(TouchLocation touch)
+        {
+            // check if are not hitting any other buttons
+            foreach (var button in this.sprites.OfType<Button>().Where(o => o != this.buttonShooting))
+            {
+                if (button.GetBounds().Contains(new Point((int)touch.Position.X, (int)touch.Position.Y)))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         void buttonShooting_Released(object sender, TouchEventArgs e)
         {
             var power = this.powerbar.PercentFull;
             this.powerbar.IsAnimating = false;
             this.powerbar.PercentFull = 0;
+            this.powerbar.PercentDirection = 1;
 
-            // check if are not hitting any other buttons
-            foreach (var button in this.sprites.OfType<Button>().Where(o => o != this.buttonShooting))
-            {
-                if (button.GetBounds().Contains(new Point((int)e.Touch.Position.X, (int)e.Touch.Position.Y)))
-                {
-                    return;
-                }
-            }
+            if (TouchHitsAnyButtons(e.Touch)) return;
 
             var direction = e.Touch.Position - tank.Body.RenderPosition;
             direction.Normalize();
@@ -116,6 +124,7 @@ namespace WindowsPhoneGame1.Lib.Screens
 
         void buttonShooting_Pressed(object sender, TouchEventArgs e)
         {
+            if (TouchHitsAnyButtons(e.Touch)) return;
             this.powerbar.IsAnimating = true;
         }
 
@@ -164,6 +173,13 @@ namespace WindowsPhoneGame1.Lib.Screens
 
         public override void Update(GameTime gameTime)
         {
+            if (!this.IsActive) return;
+            if (this.Enemies.Where(o => o.IsVisible).Count() == 0)
+            {
+                this.IsActive = false;
+                this.Game1.StartScreen.IsActive = true;
+            }
+
             var elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             var rect = this.tank.Body.CalculateNextBounds(gameTime);

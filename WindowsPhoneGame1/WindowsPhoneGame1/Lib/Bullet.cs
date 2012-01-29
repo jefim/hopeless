@@ -43,6 +43,7 @@ namespace WindowsPhoneGame1.Lib
 
             if (this.Scale < 1 && !alreadyDidHitTest)
             {
+                alreadyDidHitTest = true;
                 foreach (var target in this.gameScreen.Enemies.Where(o => o.IsVisible).ToList())
                 {
                     if (target.GetBounds().Intersects(this.GetBounds()))
@@ -52,7 +53,11 @@ namespace WindowsPhoneGame1.Lib
                 }
             }
 
-            if (this.Scale < -5) this.IsVisible = false;
+            if (this.Scale < -5)
+            {
+                this.IsVisible = false;
+                this.Position = new Vector2(float.MinValue, float.MinValue);
+            }
         }
 
         private bool alreadyDidHitTest = false;
