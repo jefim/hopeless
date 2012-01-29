@@ -9,7 +9,7 @@ namespace WindowsPhoneGame1.Lib
 {
     public class SpriteManager : DrawableGameComponent
     {
-        private SpriteBatch spriteBatch;
+        protected SpriteBatch spriteBatch;
         protected List<Sprite> sprites;
         public Game1 Game1 { get { return this.Game as Game1; } }
 

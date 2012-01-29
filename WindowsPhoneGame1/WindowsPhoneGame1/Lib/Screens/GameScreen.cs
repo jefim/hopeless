@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input.Touch;
 using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace WindowsPhoneGame1.Lib.Screens
 {
@@ -16,11 +17,13 @@ namespace WindowsPhoneGame1.Lib.Screens
         private Vector2 direction;
         private Button buttonShooting;
         private Powerbar powerbar;
+        private SpriteFont font;
 
         public GameScreen(Game1 game)
             : base(game)
         {
             // SPRITES
+
             this.tilemap = new Tilemap("tilemap2", this);
             this.Add(tilemap);
 
@@ -33,22 +36,22 @@ namespace WindowsPhoneGame1.Lib.Screens
             this.Add(tank.Body);
             this.Add(tank.Cannon);
 
-            var enemy = new Target("snake", 84, 84, 0.1f, this);
+            var offset0 = new Vector2(1000, 1000);
+            var enemy = new Target("snake", 84, 84, 0.1f, this) { Position = new Vector2(0, 0) + offset0 };
             this.Enemies.Add(enemy);
             this.Add(enemy);
 
-            enemy = new Target("snake", 84, 84, 0.1f, this) { Position = new Vector2(65, 189) };
+            enemy = new Target("snake", 84, 84, 0.1f, this) { Position = new Vector2(65, 189) + offset0 };
             this.Enemies.Add(enemy);
             this.Add(enemy);
 
-            enemy = new Target("snake", 84, 84, 0.1f, this) { Position = new Vector2(560, 256) };
+            enemy = new Target("snake", 84, 84, 0.1f, this) { Position = new Vector2(560, 256) + offset0 };
             this.Enemies.Add(enemy);
             this.Add(enemy);
 
-            enemy = new Target("snake", 84, 84, 0.1f, this) { Position = new Vector2(300, 300) };
+            enemy = new Target("snake", 84, 84, 0.1f, this) { Position = new Vector2(300, 300) + offset0 };
             this.Enemies.Add(enemy);
             this.Add(enemy);
-
 
             // UI ELEMENTS
             var offset = new Vector2(7, 155);
@@ -58,7 +61,7 @@ namespace WindowsPhoneGame1.Lib.Screens
             buttonUp.Released += new EventHandler<TouchEventArgs>(buttonNavigation_Released);
             this.Add(buttonUp);
 
-            var buttonDown = new Button("joystick_button_v") { Position = offset + new Vector2(115, 210) };
+            var buttonDown = new Button("joystick_button_v2") { Position = offset + new Vector2(115, 210) };
             buttonDown.Pressed += new EventHandler<TouchEventArgs>(buttonDown_Touch);
             buttonDown.Released += new EventHandler<TouchEventArgs>(buttonNavigation_Released);
             this.Add(buttonDown);
@@ -68,7 +71,7 @@ namespace WindowsPhoneGame1.Lib.Screens
             buttonLeft.Released += new EventHandler<TouchEventArgs>(buttonNavigation_Released);
             this.Add(buttonLeft);
 
-            var buttonRight = new Button("joystick_button_h") { Position = offset + new Vector2(210, 115) };
+            var buttonRight = new Button("joystick_button_h2") { Position = offset + new Vector2(210, 115) };
             buttonRight.Pressed += new EventHandler<TouchEventArgs>(buttonRight_Touch);
             buttonRight.Released += new EventHandler<TouchEventArgs>(buttonNavigation_Released);
             this.Add(buttonRight);
@@ -88,6 +91,14 @@ namespace WindowsPhoneGame1.Lib.Screens
 
             MediaPlayer.IsRepeating = true;
             MediaPlayer.Play(this.Game1.MySong);
+
+            this.SceneOffset = new Vector2(-1000, -1000);
+        }
+
+        protected override void LoadContent()
+        {
+            base.LoadContent();
+            this.font = this.Game.Content.Load<SpriteFont>("SegoeUI");
         }
 
         bool TouchHitsAnyButtons(TouchLocation touch)
@@ -124,6 +135,20 @@ namespace WindowsPhoneGame1.Lib.Screens
                 Direction = direction,
                 Speed = 300
             });
+        }
+
+        public override void Draw(GameTime gameTime)
+        {
+            if (!this.IsActive) return;
+
+            base.Draw(gameTime);
+            this.spriteBatch.Begin();
+
+            this.sprites.ForEach(o => o.Draw(this.spriteBatch));
+
+            spriteBatch.DrawString(this.font, "Snakes remaining: " + this.Enemies.Count(o => o.IsVisible), new Vector2(10, 10), Color.Black);
+
+            this.spriteBatch.End();
         }
 
         void buttonShooting_Pressed(object sender, TouchEventArgs e)
@@ -187,11 +212,12 @@ namespace WindowsPhoneGame1.Lib.Screens
             {
                 if (timer == null) timer = 0;
                 timer += elapsed;
-                if (timer > 2)
+                if (timer > 1)
                 {
                     MediaPlayer.Stop();
                     this.IsActive = false;
                     this.Game1.StartScreen.IsActive = true;
+                    this.Game1.StartScreen.StartButton.IsEnabled = true;
                 }
             }
 

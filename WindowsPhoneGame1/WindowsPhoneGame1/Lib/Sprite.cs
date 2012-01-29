@@ -15,7 +15,11 @@ namespace WindowsPhoneGame1.Lib
         private Texture2D texture = null;
 
         public string TexturePath { get { return texturePath; } }
-        public Texture2D Texture { get { return texture; } }
+        public Texture2D Texture
+        {
+            get { return texture; }
+            set { texture = value; }
+        }
         public Vector2 Position { get; set; }
         public Vector2 RenderPosition { get; set; }
         public Vector2 Direction { get; set; }

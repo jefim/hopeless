@@ -72,6 +72,7 @@
     <Compile Include="Lib\Button.cs" />
     <Compile Include="Lib\Powerbar.cs" />
     <Compile Include="Lib\Screens\StartScreen.cs" />
+    <Compile Include="Lib\StartButton.cs" />
     <Compile Include="Lib\Tank.cs" />
     <Compile Include="Lib\Screens\GameScreen.cs" />
     <Compile Include="Lib\SpriteManager.cs" />
