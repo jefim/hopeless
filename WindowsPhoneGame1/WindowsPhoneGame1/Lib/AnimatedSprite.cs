@@ -48,9 +48,15 @@ namespace WindowsPhoneGame1.Lib
         public override void Draw(SpriteBatch sb)
         {
             //base.Draw(sb);
-            var sourceRect = new Rectangle(currentFrame * frameWidth, this.TextureTopOffset, this.frameWidth, this.frameHeight);
-            sb.Draw(this.Texture, this.Position, sourceRect, Color.White);
-
+            RenderAtPosition(sb, this.Position);
         }
+
+        protected void RenderAtPosition(SpriteBatch sb, Vector2 position)
+        {
+            var sourceRect = new Rectangle(currentFrame * frameWidth, this.TextureTopOffset, this.frameWidth, this.frameHeight);
+            sb.Draw(this.Texture, position, sourceRect, Color.White, this.Rotation, this.Origin, 1, SpriteEffects.None, 0);
+        }
+
+       // protected Ren
     }
 }

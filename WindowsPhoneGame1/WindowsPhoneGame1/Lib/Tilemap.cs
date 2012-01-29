@@ -5,17 +5,17 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input.Touch;
+using WindowsPhoneGame1.Lib.Screens;
 
 namespace WindowsPhoneGame1.Lib
 {
-    public class Tilemap : Sprite
+    public class Tilemap : GameScreenSprite
     {
         public float DistanceToMove = 0.0f;
 
-        public Tilemap(string texturePath)
-            : base(texturePath)
+        public Tilemap(string texturePath, GameScreen gameScreen)
+            : base(texturePath, 128, 128, 1, gameScreen)
         {
-            this.Speed = 2;
         }
 
         private int[,] map =
@@ -72,7 +72,7 @@ namespace WindowsPhoneGame1.Lib
             {
                 for (int j = 0; j < map.GetLength(0); j++)
                 {
-                    var tilePosition = this.Position + (new Vector2(i * tileSize.X, j * tileSize.Y));
+                    var tilePosition = this.gameScreen.SceneOffset + this.Position + (new Vector2(i * tileSize.X, j * tileSize.Y));
                     var sourceRect = new Rectangle((int)(map[j, i]%16 * tileSize.X), (int)(map[j, i]/16 * tileSize.Y), (int)tileSize.X, (int)tileSize.Y);
                     sb.Draw(this.Texture, tilePosition, sourceRect, Color.White);
                 }

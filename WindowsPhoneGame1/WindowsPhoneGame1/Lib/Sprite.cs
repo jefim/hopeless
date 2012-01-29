@@ -40,6 +40,10 @@ namespace WindowsPhoneGame1.Lib
             {
                 this.Position += this.Direction * this.Speed * elapsedS;
             }
+            if (this.Direction != Vector2.Zero)
+            {
+                this.Rotation = Utils.VectorToAngle(this.Direction);
+            }
         }
 
         public virtual void Draw(SpriteBatch sb)
