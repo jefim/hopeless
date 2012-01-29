@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
 using Microsoft.Xna.Framework.Media;
 using WindowsPhoneGame1.Lib;
+using WindowsPhoneGame1.Lib.Screens;
 
 namespace WindowsPhoneGame1
 {
@@ -20,7 +21,7 @@ namespace WindowsPhoneGame1
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        SpriteManager sprites = null;
+        GameScreen gameScreen = null;
 
         public const int ScreenWidth = 800;
         public const int ScrrenHeight = 480;
@@ -44,13 +45,8 @@ namespace WindowsPhoneGame1
 
             TouchPanel.EnabledGestures = GestureType.Tap | GestureType.DoubleTap;
 
-            this.sprites = new SpriteManager(this);
-            this.Components.Add(this.sprites);
-
-            this.sprites.Add(new Tilemap("tilemap2"));
-            var sprite = new Animated8DirSprite("horse", 73, 77, 0.05f);
-            sprite.Position = new Vector2(250, 250);
-            this.sprites.Add(sprite);
+            this.gameScreen = new GameScreen(this);
+            this.Components.Add(this.gameScreen);
         }
 
         /// <summary>

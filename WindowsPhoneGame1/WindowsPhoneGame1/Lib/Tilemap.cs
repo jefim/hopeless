@@ -41,28 +41,28 @@ namespace WindowsPhoneGame1.Lib
 
         public override void Update(GameTime gameTime)
         {
-            this.HandleInput();
-            //base.Update(gameTime);
-            float elapsedS = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            //this.HandleInput();
+            base.Update(gameTime);
+            //float elapsedS = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (this.DistanceToMove > 0)
-            {
+            //if (this.DistanceToMove > 0)
+            //{
                 
-                // calculate movement
-                var moveVector = this.Speed * this.Direction * elapsedS;
+            //    // calculate movement
+            //    var moveVector = this.Speed * this.Direction * elapsedS;
 
-                // if move length is less that what we need to move - clip the move vector
-                if (moveVector.Length() > this.DistanceToMove) moveVector *= this.DistanceToMove / moveVector.Length();
+            //    // if move length is less that what we need to move - clip the move vector
+            //    if (moveVector.Length() > this.DistanceToMove) moveVector *= this.DistanceToMove / moveVector.Length();
 
-                // reduce move distance
-                this.DistanceToMove -= moveVector.Length();
+            //    // reduce move distance
+            //    this.DistanceToMove -= moveVector.Length();
 
-                // if distance is small - stop
-                if (this.DistanceToMove < 1) { this.DistanceToMove = 0.0f; }
-                this.Position += moveVector;
+            //    // if distance is small - stop
+            //    if (this.DistanceToMove < 1) { this.DistanceToMove = 0.0f; }
+            //    this.Position += moveVector;
                 
-                //this.Position = new Vector2(this.Position.X % Game1.ScreenWidth, this.Position.Y % Game1.ScrrenHeight);
-            }
+            //    //this.Position = new Vector2(this.Position.X % Game1.ScreenWidth, this.Position.Y % Game1.ScrrenHeight);
+            //}
         }
 
         public override void Draw(SpriteBatch sb)
@@ -82,12 +82,12 @@ namespace WindowsPhoneGame1.Lib
         protected override void OnTouch(Microsoft.Xna.Framework.Input.Touch.TouchLocation touch)
         {
             base.OnTouch(touch);
-            if (touch.State == TouchLocationState.Moved)
-            {
-                this.Direction = -1 * (touch.Position - new Vector2(Game1.ScreenWidth / 2, Game1.ScrrenHeight / 2));
-                this.DistanceToMove = this.Direction.Length();
-                this.Direction.Normalize();
-            }
+            //if (touch.State == TouchLocationState.Moved)
+            //{
+            //    this.Direction = -1 * (touch.Position - new Vector2(Game1.ScreenWidth / 2, Game1.ScrrenHeight / 2));
+            //    this.DistanceToMove = this.Direction.Length();
+            //    this.Direction.Normalize();
+            //}
         }
     }
 }

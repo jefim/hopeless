@@ -67,24 +67,29 @@ namespace WindowsPhoneGame1.Lib
             this.directions[this.FaceDirection].Draw(sb);
         }
 
+        public void FacePoint(Vector2 point)
+        {
+
+        }
+
         protected override void OnTouch(TouchLocation touch)
         {
             base.OnTouch(touch);
 
-            if (touch.State == TouchLocationState.Moved)
-            {
-                var direction = touch.Position - this.Position;
-                if (direction.X > 0)
-                {
-                    if (direction.Y > 0) this.FaceDirection = 7;
-                    else this.FaceDirection = 0;
-                }
-                else
-                {
-                    if (direction.Y > 0) this.FaceDirection = 3;
-                    else this.FaceDirection = 5;
-                }
-            }
+            //if (touch.State == TouchLocationState.Moved)
+            //{
+            //    var direction = touch.Position - this.Position;
+            //    if (direction.X > 0)
+            //    {
+            //        if (direction.Y > 0) this.FaceDirection = 7;
+            //        else this.FaceDirection = 0;
+            //    }
+            //    else
+            //    {
+            //        if (direction.Y > 0) this.FaceDirection = 3;
+            //        else this.FaceDirection = 5;
+            //    }
+            //}
         }
     }
 }

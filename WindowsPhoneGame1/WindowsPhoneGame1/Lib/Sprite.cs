@@ -19,6 +19,8 @@ namespace WindowsPhoneGame1.Lib
         public Vector2 Position { get; set; }
         public Vector2 Direction { get; set; }
         public float Speed { get; set; }
+        public float Rotation { get; set; }
+        public Vector2 Origin { get; set; }
 
         public Sprite(string texturePath)
         {
@@ -42,7 +44,7 @@ namespace WindowsPhoneGame1.Lib
 
         public virtual void Draw(SpriteBatch sb)
         {
-            sb.Draw(this.Texture, this.Position, Color.White);
+            sb.Draw(this.Texture, this.Position, null, Color.White, this.Rotation, this.Origin, 1, SpriteEffects.None, 0);
         }
 
         protected void HandleInput()
