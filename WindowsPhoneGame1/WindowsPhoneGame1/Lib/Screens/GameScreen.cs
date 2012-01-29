@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input.Touch;
+using Microsoft.Xna.Framework.Audio;
 
 namespace WindowsPhoneGame1.Lib.Screens
 {
@@ -15,10 +16,12 @@ namespace WindowsPhoneGame1.Lib.Screens
         private Vector2 direction;
         private Button buttonShooting;
         private Powerbar powerbar;
-
+        
         public GameScreen(Game1 game)
             : base(game)
         {
+            
+            
             // SPRITES
             this.tilemap = new Tilemap("tilemap2", this);
             this.Add(tilemap);
@@ -100,7 +103,7 @@ namespace WindowsPhoneGame1.Lib.Screens
                     return;
                 }
             }
-
+            //this.Game1.BangSfx().Play();
             var direction = e.Touch.Position - tank.Body.RenderPosition;
             direction.Normalize();
             this.tank.TurretDirection = direction;
@@ -139,6 +142,7 @@ namespace WindowsPhoneGame1.Lib.Screens
             this.direction = new Vector2(-1, 0);
             this.tank.BodyDirection = new Vector2(-1, 0);
             this.tank.Body.Paused = false;
+            //this.Game1.TankSfx().Play();
         }
 
         void buttonLeft_Touch(object sender, TouchEventArgs e)
@@ -146,6 +150,7 @@ namespace WindowsPhoneGame1.Lib.Screens
             this.direction = new Vector2(1, 0);
             this.tank.BodyDirection = new Vector2(1, 0);
             this.tank.Body.Paused = false;
+            //this.Game1.TankSfx().Play();
         }
 
         void buttonDown_Touch(object sender, TouchEventArgs e)
@@ -153,6 +158,7 @@ namespace WindowsPhoneGame1.Lib.Screens
             this.direction = new Vector2(0, -1);
             this.tank.BodyDirection = new Vector2(0, -1);
             this.tank.Body.Paused = false;
+            //this.Game1.TankSfx().Play();
         }
 
         void buttonUp_Touch(object sender, TouchEventArgs e)
@@ -160,6 +166,7 @@ namespace WindowsPhoneGame1.Lib.Screens
             this.direction = new Vector2(0, 1);
             this.tank.BodyDirection = new Vector2(0, 1);
             this.tank.Body.Paused = false;
+            //this.Game1.TankSfx().Play();
         }
 
         public override void Update(GameTime gameTime)

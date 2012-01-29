@@ -23,8 +23,10 @@ namespace WindowsPhoneGame1
         SpriteBatch spriteBatch;
         GameScreen gameScreen = null;
         Song mysong;
+        SoundEffect tankSfx;
+        SoundEffect bangSfx;
+        SoundEffect boomSfx;
     
-
         public const int ScreenWidth = 800;
         public const int ScrrenHeight = 480;
         public static Vector2 ScreenSize = new Vector2(ScreenWidth, ScrrenHeight);
@@ -52,10 +54,41 @@ namespace WindowsPhoneGame1
             this.Components.Add(this.gameScreen);
 
             mysong = Content.Load<Song>("random");
+            /*
+            tankSfx = Content.Load<SoundEffect>("tank");
+            SoundEffectInstance instance = soundEffect.CreateInstance();
+            instance.isLooped = true;
+            bangSfx = Content.Load<SoundEffect>("bang");
+            boomSfx = Content.Load<SoundEffect>("boom");
+            */
             MediaPlayer.IsRepeating = true;
             MediaPlayer.Play(mysong);
+          
+        }
+/*
+        public SoundEffect TankSfx
+        {
+            get{
+                return tankSfx;
+            }
         }
 
+        public SoundEffect BangSfx
+        {
+            get
+            {
+                return bangSfx;
+            }
+        }
+
+        public SoundEffect BoomSfx
+        {
+            get
+            {
+                return boomSfx;
+            }
+        }
+ */
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
         /// This is where it can query for any required services and load any non-graphic
