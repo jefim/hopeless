@@ -138,6 +138,7 @@ namespace WindowsPhoneGame1.Lib.Screens
                 Direction = direction,
                 Speed = 300
             });
+            this.Game1.BangSfx.Play();
         }
 
         public override void Draw(GameTime gameTime)

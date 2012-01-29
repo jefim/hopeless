@@ -25,8 +25,8 @@ namespace WindowsPhoneGame1
         public StartScreen StartScreen = null;
         public Song MySong;
         SoundEffectInstance tankSfx;
-        SoundEffect bangSfx;
-        SoundEffect boomSfx;
+        SoundEffectInstance aiaiaiSfx;
+        SoundEffectInstance bangSfx;
     
         public const int ScreenWidth = 800;
         public const int ScrrenHeight = 480;
@@ -59,9 +59,12 @@ namespace WindowsPhoneGame1
             var tankSfx = Content.Load<SoundEffect>("tank");
             this.tankSfx = tankSfx.CreateInstance();
             this.tankSfx.IsLooped = true;
-            /*bangSfx = Content.Load<SoundEffect>("bang");
-            boomSfx = Content.Load<SoundEffect>("boom");
-            */
+            var aiaiaiSfx = Content.Load<SoundEffect>("aiaiai");
+            this.aiaiaiSfx = aiaiaiSfx.CreateInstance();
+
+            var bangSfx = Content.Load<SoundEffect>("bang");
+            this.bangSfx = bangSfx.CreateInstance();
+            
           
         }
 
@@ -71,23 +74,22 @@ namespace WindowsPhoneGame1
                 return tankSfx;
             }
         }
-        /*
-        public SoundEffect BangSfx
+
+        public SoundEffectInstance AiaiaiSfx
+        {
+            get
+            {
+                return aiaiaiSfx;
+            }
+        }
+        
+        public SoundEffectInstance BangSfx
         {
             get
             {
                 return bangSfx;
             }
         }
-
-        public SoundEffect BoomSfx
-        {
-            get
-            {
-                return boomSfx;
-            }
-        }
-         * */
  
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.

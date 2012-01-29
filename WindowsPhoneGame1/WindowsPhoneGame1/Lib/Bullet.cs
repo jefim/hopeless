@@ -48,6 +48,7 @@ namespace WindowsPhoneGame1.Lib
                 {
                     if (target.GetBounds().Intersects(this.GetBounds()))
                     {
+                        this.gameScreen.Game1.AiaiaiSfx.Play();
                         target.IsVisible = false;
                     }
                 }
