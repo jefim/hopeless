@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input.Touch;
 using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace WindowsPhoneGame1.Lib.Screens
@@ -18,10 +19,12 @@ namespace WindowsPhoneGame1.Lib.Screens
         private Button buttonShooting;
         private Powerbar powerbar;
         private SpriteFont font;
-
+        
         public GameScreen(Game1 game)
             : base(game)
         {
+            
+            
             // SPRITES
 
             this.tilemap = new Tilemap("tilemap2", this);
@@ -111,7 +114,7 @@ namespace WindowsPhoneGame1.Lib.Screens
                     return true;
                 }
             }
-
+            //this.Game1.BangSfx().Play();
             return false;
         }
 
@@ -177,6 +180,7 @@ namespace WindowsPhoneGame1.Lib.Screens
             this.direction = new Vector2(-1, 0);
             this.tank.BodyDirection = new Vector2(-1, 0);
             this.tank.Body.Paused = false;
+            //this.Game1.TankSfx().Play();
         }
 
         void buttonLeft_Touch(object sender, TouchEventArgs e)
@@ -184,6 +188,7 @@ namespace WindowsPhoneGame1.Lib.Screens
             this.direction = new Vector2(1, 0);
             this.tank.BodyDirection = new Vector2(1, 0);
             this.tank.Body.Paused = false;
+            //this.Game1.TankSfx().Play();
         }
 
         void buttonDown_Touch(object sender, TouchEventArgs e)
@@ -191,6 +196,7 @@ namespace WindowsPhoneGame1.Lib.Screens
             this.direction = new Vector2(0, -1);
             this.tank.BodyDirection = new Vector2(0, -1);
             this.tank.Body.Paused = false;
+            //this.Game1.TankSfx().Play();
         }
 
         void buttonUp_Touch(object sender, TouchEventArgs e)
@@ -198,6 +204,7 @@ namespace WindowsPhoneGame1.Lib.Screens
             this.direction = new Vector2(0, 1);
             this.tank.BodyDirection = new Vector2(0, 1);
             this.tank.Body.Paused = false;
+            //this.Game1.TankSfx().Play();
         }
 
         float? timer = null;
