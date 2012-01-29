@@ -23,12 +23,6 @@ namespace WindowsPhoneGame1.Lib
             this.RenderPosition = CalculateNextRenderPosition(gameTime);
         }
 
-        public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch sb)
-        {
-            //base.Draw(sb);
-            this.RenderAtPosition(sb, this.RenderPosition);
-        }
-
         public override Vector2 CalculateNextRenderPosition(GameTime gameTime)
         {
             return this.Position + this.gameScreen.SceneOffset;

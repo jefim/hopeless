@@ -46,11 +46,13 @@ namespace WindowsPhoneGame1.Lib
             {
                 this.Rotation = Utils.VectorToAngle(this.Direction);
             }
+
+            this.RenderPosition = this.CalculateNextRenderPosition(gameTime);
         }
 
         public virtual void Draw(SpriteBatch sb)
         {
-            sb.Draw(this.Texture, this.Position, null, Color.White, this.Rotation, this.Origin, 1, SpriteEffects.None, 0);
+            sb.Draw(this.Texture, this.RenderPosition, null, Color.White, this.Rotation, this.Origin, 1, SpriteEffects.None, 0);
         }
 
         protected void HandleInput()

@@ -42,8 +42,8 @@ namespace WindowsPhoneGame1.Lib.Screens
             buttonRight.Released += new EventHandler<TouchEventArgs>(buttonNavigation_Released);
             this.Add(buttonRight);
             this.tank = new Tank("body", "cannon", 84, 68, 0.10f);
-	    this.tank.Origin = new Vector2(84 / 2, 68 / 2);
-	this.tank.BodyRotation = (float)Math.PI / 2;
+            this.tank.Origin = new Vector2(84 / 2, 68 / 2);
+            this.tank.BodyRotation = (float)Math.PI / 2;
 
             tank.Position = new Vector2(400 - 35, 240 - 35);
 
@@ -114,19 +114,19 @@ namespace WindowsPhoneGame1.Lib.Screens
         {
             var elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
+            var rect = this.tank.Body.CalculateNextBounds(gameTime);
+            rect.Inflate(3, 3);
             foreach (var enemy in enemies)
             {
                 var predictEnemyRect = enemy.CalculateNextBounds(gameTime);
                 bool intersects = false;
-                var rect = this.tank.Body.CalculateNextBounds(gameTime);
-                rect.Inflate(5, 5);
                 predictEnemyRect.Intersects(ref rect, out intersects);
-                if(intersects)
+                if (intersects)
                 {
+                    this.SceneOffset += 200 * elapsed * -1 * this.direction;
                     this.StopMoving();
                 }
             }
-
             this.SceneOffset += 200 * elapsed * this.direction;
 
             base.Update(gameTime);
