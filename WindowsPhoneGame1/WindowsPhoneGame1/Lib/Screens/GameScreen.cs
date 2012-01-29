@@ -163,6 +163,7 @@ namespace WindowsPhoneGame1.Lib.Screens
         void buttonNavigation_Released(object sender, TouchEventArgs e)
         {
             this.StopMoving();
+            this.Game1.TankSfx.Stop(true);
         }
 
         public Vector2 SceneOffset { get; set; }
@@ -180,7 +181,7 @@ namespace WindowsPhoneGame1.Lib.Screens
             this.direction = new Vector2(-1, 0);
             this.tank.BodyDirection = new Vector2(-1, 0);
             this.tank.Body.Paused = false;
-            //this.Game1.TankSfx().Play();
+            this.Game1.TankSfx.Play();
         }
 
         void buttonLeft_Touch(object sender, TouchEventArgs e)
@@ -188,7 +189,7 @@ namespace WindowsPhoneGame1.Lib.Screens
             this.direction = new Vector2(1, 0);
             this.tank.BodyDirection = new Vector2(1, 0);
             this.tank.Body.Paused = false;
-            //this.Game1.TankSfx().Play();
+            this.Game1.TankSfx.Play();
         }
 
         void buttonDown_Touch(object sender, TouchEventArgs e)
@@ -196,7 +197,7 @@ namespace WindowsPhoneGame1.Lib.Screens
             this.direction = new Vector2(0, -1);
             this.tank.BodyDirection = new Vector2(0, -1);
             this.tank.Body.Paused = false;
-            //this.Game1.TankSfx().Play();
+            this.Game1.TankSfx.Play();
         }
 
         void buttonUp_Touch(object sender, TouchEventArgs e)
@@ -204,7 +205,7 @@ namespace WindowsPhoneGame1.Lib.Screens
             this.direction = new Vector2(0, 1);
             this.tank.BodyDirection = new Vector2(0, 1);
             this.tank.Body.Paused = false;
-            //this.Game1.TankSfx().Play();
+            this.Game1.TankSfx.Play();
         }
 
         float? timer = null;

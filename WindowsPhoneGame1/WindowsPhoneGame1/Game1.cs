@@ -24,7 +24,7 @@ namespace WindowsPhoneGame1
         public GameScreen GameScreen = null;
         public StartScreen StartScreen = null;
         public Song MySong;
-        SoundEffect tankSfx;
+        SoundEffectInstance tankSfx;
         SoundEffect bangSfx;
         SoundEffect boomSfx;
     
@@ -55,23 +55,23 @@ namespace WindowsPhoneGame1
             this.Components.Add(this.StartScreen);
 
             MySong = Content.Load<Song>("random");
-            /*
-            tankSfx = Content.Load<SoundEffect>("tank");
-            SoundEffectInstance instance = soundEffect.CreateInstance();
-            instance.isLooped = true;
-            bangSfx = Content.Load<SoundEffect>("bang");
+            
+            var tankSfx = Content.Load<SoundEffect>("tank");
+            this.tankSfx = tankSfx.CreateInstance();
+            this.tankSfx.IsLooped = true;
+            /*bangSfx = Content.Load<SoundEffect>("bang");
             boomSfx = Content.Load<SoundEffect>("boom");
             */
           
         }
-/*
-        public SoundEffect TankSfx
+
+        public SoundEffectInstance TankSfx
         {
             get{
                 return tankSfx;
             }
         }
-
+        /*
         public SoundEffect BangSfx
         {
             get
@@ -87,7 +87,8 @@ namespace WindowsPhoneGame1
                 return boomSfx;
             }
         }
- */
+         * */
+ 
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
         /// This is where it can query for any required services and load any non-graphic
