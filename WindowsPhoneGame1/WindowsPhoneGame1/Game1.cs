@@ -23,6 +23,8 @@ namespace WindowsPhoneGame1
         SpriteBatch spriteBatch;
         public GameScreen GameScreen = null;
         public StartScreen StartScreen = null;
+        Song mysong;
+    
 
         public const int ScreenWidth = 800;
         public const int ScrrenHeight = 480;
@@ -53,6 +55,10 @@ namespace WindowsPhoneGame1
             this.StartScreen = new StartScreen(this);
             this.StartScreen.IsActive = true;
             this.Components.Add(this.StartScreen);
+
+            mysong = Content.Load<Song>("random");
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Play(mysong);
         }
 
         /// <summary>
